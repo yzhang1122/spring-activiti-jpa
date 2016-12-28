@@ -5,3 +5,8 @@ out/
 .idea
 *.iml
 .DS_Store
+.bpmn/
+.classpath
+.project
+.settings/
+target/
