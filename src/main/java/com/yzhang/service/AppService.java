@@ -8,6 +8,7 @@ import com.yzhang.repository.CarRepository;
 import com.yzhang.repository.DepartmentRepository;
 import com.yzhang.repository.PersonRepository;
 
+import org.activiti.engine.delegate.BpmnError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class AppService {
   private ApplicantRepository applicantRepository;
 
 
+
   public boolean checkCondition(Object condition) {
     logger.info("in the process of check condition");
-
     return (Boolean) condition;
   }
 
@@ -71,6 +72,7 @@ public class AppService {
 
   public void saveApplicant() {
     logger.info("in method saveApplicant..");
+    //throw new BpmnError("errorCode");
     Applicant applicant = new Applicant("Johnny", "wer@ew.com", "2323434533");
     applicantRepository.save(applicant);
 
@@ -97,6 +99,11 @@ public class AppService {
 
     //logger.info(p.toString());
     //logger.info(app.toString());
+
+  }
+
+  public void handleError() {
+    logger.info("in method handleError..");
 
   }
 

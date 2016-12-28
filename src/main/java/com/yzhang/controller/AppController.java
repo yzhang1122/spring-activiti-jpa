@@ -42,4 +42,9 @@ public class AppController {
   public void test() {
     runtimeService.startProcessInstanceByKey("transactionTest");
   }
+
+  @RequestMapping(value = "/test2", method = RequestMethod.GET)
+  public void testError() {
+    runtimeService.startProcessInstanceByKey("errorHandler");
+  }
 }
