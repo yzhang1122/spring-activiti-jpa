@@ -1,0 +1,35 @@
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useSSL=false
+    username: root
+    password: purpose
+    test-on-borrow: true
+    validation-query: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      org.hibernate.envers:
+        audit_table_suffix: History
+        revision_field_name: revision
+        revision_type_field_name: revisionType
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  activiti:
+    datasource:
+      url: jdbc:mysql://localhost:3306/activiti_test?autoReconnect=true&useSSL=false
+    databaseSchemaUpdate: true
+    mailServerHost: mail.intuit.com
+    mailServerPort: 25
+    mailServerDefaultFrom: no-reply@intuit.com
+activiti.workflow:
+  loadEmailTemplates: true
+springfox.documentation.swagger:
+  v1.path: /swagger/api-docs
+  v2.path: /swagger/v2/api-docs
