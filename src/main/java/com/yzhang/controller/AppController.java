@@ -36,4 +36,10 @@ public class AppController {
     logger.info(s1.toString());
     logger.info(s2.toString());
   }
+
+
+  @RequestMapping(value = "/test1", method = RequestMethod.GET)
+  public void test() {
+    runtimeService.startProcessInstanceByKey("transactionTest");
+  }
 }

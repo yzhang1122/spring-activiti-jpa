@@ -1,5 +1,7 @@
 package com.yzhang.service;
 
+import com.yzhang.domain.Applicant;
+import com.yzhang.domain.Person;
 import com.yzhang.domain.Student;
 import com.yzhang.repository.ApplicantRepository;
 import com.yzhang.repository.CarRepository;
@@ -53,5 +55,50 @@ public class AppService {
     a2.setAge(32);
 
   }
+
+  public void savePeron() {
+
+    logger.info("in method savePeron..");
+
+    Person p = new Person();
+    p.setFirstName("Mike");
+    p.setLastName("Lin");
+    p.setCity("Daly city");
+    p.setAddress("123 main st");
+    personRepository.save(p);
+  }
+
+
+  public void saveApplicant() {
+    logger.info("in method saveApplicant..");
+    Applicant applicant = new Applicant("Johnny", "wer@ew.com", "2323434533");
+    applicantRepository.save(applicant);
+
+  }
+
+  public void saveCar() {
+    logger.info("in method saveCar..");
+
+    Person p = new Person();
+    p.setFirstName("Henry");
+    p.setLastName("Port");
+    p.setCity("San Francisco");
+    p.setAddress("222 main st");
+    personRepository.save(p);
+
+  }
+
+
+  public void printResult(Object person, Object applicant) {
+    logger.info("in method printResult..");
+    //throw new BpmnError("Ops");
+    //Person p = (Person)person;
+    //Applicant app = (Applicant)applicant;
+
+    //logger.info(p.toString());
+    //logger.info(app.toString());
+
+  }
+
 
 }

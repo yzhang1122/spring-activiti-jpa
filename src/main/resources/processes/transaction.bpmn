@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="transactionTest" name="My process" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <serviceTask id="servicetask1" name="save person" activiti:expression="${appService.savePeron()}" activiti:resultVariableName="person"></serviceTask>
+    <sequenceFlow id="flow2" sourceRef="parallelgateway1" targetRef="servicetask1"></sequenceFlow>
+    <parallelGateway id="parallelgateway2" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow4" sourceRef="servicetask1" targetRef="parallelgateway2"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <serviceTask id="servicetask2" name="save applicant" activiti:expression="${appService.saveApplicant()}" activiti:resultVariableName="applicant"></serviceTask>
+    <sequenceFlow id="flow7" sourceRef="parallelgateway1" targetRef="servicetask2"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="servicetask2" targetRef="parallelgateway2"></sequenceFlow>
+    <serviceTask id="servicetask3" name="print result" activiti:expression="${appService.printResult(person, applicant)}"></serviceTask>
+    <sequenceFlow id="flow9" sourceRef="parallelgateway2" targetRef="servicetask3"></sequenceFlow>
+    <sequenceFlow id="flow10" sourceRef="servicetask3" targetRef="endevent1"></sequenceFlow>
+    <serviceTask id="servicetask4" name="save car" activiti:expression="${appService.saveCar()}"></serviceTask>
+    <sequenceFlow id="flow13" sourceRef="startevent1" targetRef="servicetask4"></sequenceFlow>
+    <sequenceFlow id="flow14" sourceRef="servicetask4" targetRef="parallelgateway1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_transactionTest">
+    <bpmndi:BPMNPlane bpmnElement="transactionTest" id="BPMNPlane_transactionTest">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="441.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="440.0" y="230.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="330.0" y="346.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway2" id="BPMNShape_parallelgateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="447.0" y="460.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="450.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="487.0" y="346.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="415.0" y="550.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask4" id="BPMNShape_servicetask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="406.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="460.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="382.0" y="346.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="382.0" y="401.0"></omgdi:waypoint>
+        <omgdi:waypoint x="467.0" y="460.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="460.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="539.0" y="346.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="539.0" y="401.0"></omgdi:waypoint>
+        <omgdi:waypoint x="467.0" y="460.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="467.0" y="500.0"></omgdi:waypoint>
+        <omgdi:waypoint x="467.0" y="550.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="467.0" y="605.0"></omgdi:waypoint>
+        <omgdi:waypoint x="467.0" y="660.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="458.0" y="125.0"></omgdi:waypoint>
+        <omgdi:waypoint x="458.0" y="150.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="458.0" y="205.0"></omgdi:waypoint>
+        <omgdi:waypoint x="460.0" y="230.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
