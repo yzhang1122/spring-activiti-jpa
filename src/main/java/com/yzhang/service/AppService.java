@@ -1,6 +1,6 @@
 package com.yzhang.service;
 
-import com.yzhang.domain.Applicant;
+import com.yzhang.domain.Student;
 import com.yzhang.repository.ApplicantRepository;
 import com.yzhang.repository.CarRepository;
 import com.yzhang.repository.DepartmentRepository;
@@ -28,9 +28,30 @@ public class AppService {
   @Autowired
   private ApplicantRepository applicantRepository;
 
-  public void startProcess() {
-    Applicant a = new Applicant("Yi", "sdfs@dsfds.com", "234232343");
-    applicantRepository.save(a);
-    logger.info("in the process");
+
+  public boolean checkCondition(Object condition) {
+    logger.info("in the process of check condition");
+
+    return (Boolean) condition;
   }
+
+  public void startProcessWithOutParam() {
+    logger.info("in the process without param");
+  }
+
+
+  public void startProcessWithParam(Object p1, Object p2) {
+    logger.info("in the process with param");
+    logger.info("------>");
+    Student a1 = (Student) p1;
+    Student a2 = (Student) p2;
+
+    logger.info(a1.toString());
+    logger.info(a2.toString());
+
+    a1.setAge(22);
+    a2.setAge(32);
+
+  }
+
 }
