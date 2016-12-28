@@ -36,5 +36,6 @@ public class AppController {
   public void testJpa() {
     Applicant a = new Applicant("Yi", "sdfs@dsfds.com", "234232343");
     applicantRepository.save(a);
+    runtimeService.startProcessInstanceByKey("myProcess");
   }
 }
