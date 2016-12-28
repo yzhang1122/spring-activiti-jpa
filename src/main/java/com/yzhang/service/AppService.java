@@ -72,7 +72,7 @@ public class AppService {
 
   public void saveApplicant() {
     logger.info("in method saveApplicant..");
-    //throw new BpmnError("errorCode");
+    //throw new BpmnError("errorCode1");
     Applicant applicant = new Applicant("Johnny", "wer@ew.com", "2323434533");
     applicantRepository.save(applicant);
 
@@ -104,6 +104,12 @@ public class AppService {
 
   public void handleError() {
     logger.info("in method handleError..");
+
+  }
+
+
+  public void handleDifferentError() {
+    logger.info("in method handleDifferentError..");
 
   }
 
