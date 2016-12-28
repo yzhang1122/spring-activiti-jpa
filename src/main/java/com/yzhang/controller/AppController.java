@@ -47,4 +47,10 @@ public class AppController {
   public void testError() {
     runtimeService.startProcessInstanceByKey("errorHandler");
   }
+
+
+  @RequestMapping(value = "/transaction", method = RequestMethod.GET)
+  public void testTransactionError() {
+    runtimeService.startProcessInstanceByKey("transactionEvent");
+  }
 }

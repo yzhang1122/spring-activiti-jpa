@@ -8,6 +8,7 @@ import com.yzhang.repository.CarRepository;
 import com.yzhang.repository.DepartmentRepository;
 import com.yzhang.repository.PersonRepository;
 
+import org.activiti.bpmn.model.CancelEventDefinition;
 import org.activiti.engine.delegate.BpmnError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,9 +73,9 @@ public class AppService {
 
   public void saveApplicant() {
     logger.info("in method saveApplicant..");
-    //throw new BpmnError("errorCode1");
     Applicant applicant = new Applicant("Johnny", "wer@ew.com", "2323434533");
     applicantRepository.save(applicant);
+    throw new BpmnError("sfd");
 
   }
 
@@ -110,6 +111,12 @@ public class AppService {
 
   public void handleDifferentError() {
     logger.info("in method handleDifferentError..");
+
+  }
+
+
+  public void handleException() {
+    logger.info("in method handleException..");
 
   }
 
