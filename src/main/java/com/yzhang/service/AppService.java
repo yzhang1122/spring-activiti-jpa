@@ -8,54 +8,49 @@ import com.yzhang.repository.CarRepository;
 import com.yzhang.repository.DepartmentRepository;
 import com.yzhang.repository.PersonRepository;
 
-import org.activiti.bpmn.model.CancelEventDefinition;
-import org.activiti.engine.delegate.BpmnError;
+import org.activiti.engine.impl.pvm.PvmTransition;
+import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
+import org.activiti.engine.impl.pvm.delegate.ActivityExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javafx.scene.control.TooltipBuilder;
+
 @Component
-public class AppService {
+public class AppService implements ActivityBehavior {
   private static final Logger logger = LoggerFactory.getLogger(AppService.class);
 
   @Autowired
-  CarRepository carRepository;
-
+  private CarRepository carRepository;
   @Autowired
   private PersonRepository personRepository;
-
   @Autowired
   private DepartmentRepository departmentRepository;
-
-
   @Autowired
   private ApplicantRepository applicantRepository;
 
+  public AppService() {
 
+  }
 
-  public boolean checkCondition(Object condition) {
-    logger.info("in the process of check condition");
-    return (Boolean) condition;
+  public void checkCondition() {
+    logger.info("------> in the process of check condition");
   }
 
   public void startProcessWithOutParam() {
-    logger.info("in the process without param");
+    logger.info("------> in the process without param");
   }
 
 
-  public void startProcessWithParam(Object p1, Object p2) {
-    logger.info("in the process with param");
-    logger.info("------>");
-    Student a1 = (Student) p1;
-    Student a2 = (Student) p2;
+  public void startProcessWithParam() {
+    logger.info("------> in the process with param");
+  }
 
-    logger.info(a1.toString());
-    logger.info(a2.toString());
 
-    a1.setAge(22);
-    a2.setAge(32);
-
+  public void finalTask() {
+    logger.info("------> in the process of finalTask");
   }
 
   public void savePeron() {
@@ -63,11 +58,12 @@ public class AppService {
     logger.info("in method savePeron..");
 
     Person p = new Person();
-    p.setFirstName("Mike");
-    p.setLastName("Lin");
-    p.setCity("Daly city");
-    p.setAddress("123 main st");
+    p.setFirstName("Harry");
+    p.setLastName("Liang");
+    p.setCity("San Francisco");
+    p.setAddress("595 Mission St");
     personRepository.save(p);
+
   }
 
 
@@ -75,7 +71,6 @@ public class AppService {
     logger.info("in method saveApplicant..");
     Applicant applicant = new Applicant("Johnny", "wer@ew.com", "2323434533");
     applicantRepository.save(applicant);
-    throw new BpmnError("sfd");
 
   }
 
@@ -120,5 +115,29 @@ public class AppService {
 
   }
 
+  public void savePersonManually() {
+    logger.info("in method savePersonManually..");
+    Person p = new Person();
+    p.setFirstName("Harry");
+    p.setLastName("Manually");
+    p.setCity("San Francisco");
+    p.setAddress("71 stevenson st");
+    personRepository.save(p);
 
+  }
+
+
+  @Override
+  public void execute(ActivityExecution activityExecution) throws Exception {
+    logger.info("in method execute..");
+    PvmTransition transition = null;
+    try {
+      savePeron();
+      transition = activityExecution.getActivity().findOutgoingTransition("flow3");
+    } catch (Throwable e) {
+      e.printStackTrace();
+      transition = activityExecution.getActivity().findOutgoingTransition("flow12");
+    }
+    activityExecution.take(transition);
+  }
 }
