@@ -1,16 +1,15 @@
-package com.yzhang.domain;
+package com.yzhang.model;
+
 
 import java.io.Serializable;
 
 public class Student implements Serializable {
   String name;
   int age;
-  String subject;
 
-  public Student(String name, int age, String subject) {
+  public Student(String name, int age) {
     this.name = name;
     this.age = age;
-    this.subject = subject;
   }
 
   public String getName() {
@@ -29,20 +28,11 @@ public class Student implements Serializable {
     this.age = age;
   }
 
-  public String getSubject() {
-    return subject;
-  }
-
-  public void setSubject(String subject) {
-    this.subject = subject;
-  }
-
   @Override
   public String toString() {
     return "Student{" +
         "name='" + name + '\'' +
         ", age=" + age +
-        ", subject='" + subject + '\'' +
         '}';
   }
 }

@@ -1,6 +1,6 @@
 package com.yzhang.controller;
 
-import com.yzhang.domain.Student;
+import com.yzhang.model.Student;
 
 import org.activiti.engine.RuntimeService;
 import org.slf4j.Logger;
@@ -43,5 +43,14 @@ public class AppController {
   @RequestMapping(value = "/transaction", method = RequestMethod.GET)
   public void testTransactionError() {
     runtimeService.startProcessInstanceByKey("transactionEvent");
+  }
+
+  @RequestMapping(value = "/student", method = RequestMethod.GET)
+  public void testDataProcess() {
+    Map<String, Object> map = new HashMap<String, Object>();
+    Student s = new Student("Yi", 11);
+    map.put("student", s);
+    runtimeService.startProcessInstanceByKey("studentProcess", map);
+    logger.info("finally: " + s.toString());
   }
 }

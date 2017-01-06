@@ -2,12 +2,13 @@ package com.yzhang.service;
 
 import com.yzhang.domain.Applicant;
 import com.yzhang.domain.Person;
-import com.yzhang.domain.Student;
+import com.yzhang.model.Student;
 import com.yzhang.repository.ApplicantRepository;
 import com.yzhang.repository.CarRepository;
 import com.yzhang.repository.DepartmentRepository;
 import com.yzhang.repository.PersonRepository;
 
+import org.activiti.engine.delegate.BpmnError;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
 import org.activiti.engine.impl.pvm.delegate.ActivityExecution;
@@ -63,6 +64,7 @@ public class AppService implements ActivityBehavior {
     p.setCity("San Francisco");
     p.setAddress("595 Mission St");
     personRepository.save(p);
+    throw new BpmnError("errorCode1");
 
   }
 
@@ -124,6 +126,31 @@ public class AppService implements ActivityBehavior {
     p.setAddress("71 stevenson st");
     personRepository.save(p);
 
+  }
+
+  public void processStudent(Object student) {
+    Student s = (Student) student;
+    logger.info("in method processStudent name");
+    logger.info(student.toString());
+    s.setName("ssdfsdfsd");
+
+  }
+
+
+  public void processStudent1(Object student) {
+    Student s = (Student) student;
+    logger.info("in method processStudent age");
+    logger.info(student.toString());
+    s.setAge(12213);
+    throw  new BpmnError("errorCode1");
+
+  }
+
+
+  public void handleStudentError(Object student) {
+    Student s = (Student) student;
+    logger.info("in method handleStudentError");
+    logger.info(student.toString());
   }
 
 
